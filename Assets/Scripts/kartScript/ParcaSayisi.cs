@@ -10,17 +10,25 @@ public class ParcaSayisi : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
+            return;
+        }
+
+        // Eğer daha önce seçim yapıldıysa, kayıtlı değeri yükle
+        if (PlayerPrefs.HasKey("SelectedGridSize"))
+        {
+            parcaSayisi = PlayerPrefs.GetInt("SelectedGridSize");
         }
     }
 
     public void ParcaSayisiAl(int parcaSayi)
     {
         parcaSayisi = parcaSayi;
-        Debug.Log("Par�a Say�s� G�ncellendi: " + parcaSayisi);
+        PlayerPrefs.SetInt("SelectedGridSize", parcaSayisi); // Seçimi kaydet
+        PlayerPrefs.Save();
+        Debug.Log("Parça Sayısı Güncellendi: " + parcaSayisi);
     }
 }

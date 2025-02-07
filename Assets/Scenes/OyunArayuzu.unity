@@ -476,6 +476,83 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 300009825}
   m_CullTransparentMesh: 1
+--- !u!1 &362864562
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 362864563}
+  - component: {fileID: 362864564}
+  m_Layer: 0
+  m_Name: oncekiSahne
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &362864563
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362864562}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.7729268, y: 1.0351499, z: -0.0512619}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1226084626}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &362864564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 362864562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d75e0fff1b19b6c4683e7e8a3bd59b72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &648577884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 648577885}
+  m_Layer: 0
+  m_Name: scriptler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &648577885
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648577884}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.1949625, y: 2.8733635, z: 28.594896}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 839391313}
+  - {fileID: 1089940762}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &839391311
 GameObject:
   m_ObjectHideFlags: 0
@@ -500,12 +577,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 839391311}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.5942845, y: -0.28763118, z: 6.601967}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.600678, y: -3.1609948, z: -21.99293}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 648577885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &880458145
 GameObject:
@@ -590,6 +667,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1089940761}
+        m_TargetAssemblyTypeName: ParcaSayisi, Assembly-CSharp
+        m_MethodName: ParcaSayisiAl
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 2020494860}
         m_TargetAssemblyTypeName: SahneGecis, Assembly-CSharp
         m_MethodName: SahneGec
@@ -602,16 +691,16 @@ MonoBehaviour:
           m_StringArgument: Oyun
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1089940761}
-        m_TargetAssemblyTypeName: ParcaSayisi, Assembly-CSharp
-        m_MethodName: ParcaSayisiAl
-        m_Mode: 3
+      - m_Target: {fileID: 2125912970}
+        m_TargetAssemblyTypeName: ButonKontrol, Assembly-CSharp
+        m_MethodName: Buton
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 2
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 2
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &880458148
@@ -652,6 +741,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 880458145}
   m_CullTransparentMesh: 1
+--- !u!1 &1016988736
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1016988737}
+  m_Layer: 0
+  m_Name: kontroller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1016988737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016988736}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.9838865, y: 2.037585, z: 6.600462}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2125912969}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1089940760
 GameObject:
   m_ObjectHideFlags: 0
@@ -690,12 +811,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1089940760}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.641011, y: -0.9932783, z: 4.69783}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -17.835974, y: -3.8666418, z: -23.897066}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 648577885}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1181360104
 GameObject:
@@ -855,6 +976,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1182729353}
   m_CullTransparentMesh: 1
+--- !u!1 &1226084625
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1226084626}
+  m_Layer: 0
+  m_Name: sahneGecis
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1226084626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1226084625}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.6535287, y: 0.33165398, z: 6.6427774}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2020494861}
+  - {fileID: 362864563}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1300215798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,6 +1171,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1089940761}
+        m_TargetAssemblyTypeName: ParcaSayisi, Assembly-CSharp
+        m_MethodName: ParcaSayisiAl
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 2020494860}
         m_TargetAssemblyTypeName: SahneGecis, Assembly-CSharp
         m_MethodName: SahneGec
@@ -1029,16 +1195,16 @@ MonoBehaviour:
           m_StringArgument: Oyun
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1089940761}
-        m_TargetAssemblyTypeName: ParcaSayisi, Assembly-CSharp
-        m_MethodName: ParcaSayisiAl
-        m_Mode: 3
+      - m_Target: {fileID: 2125912970}
+        m_TargetAssemblyTypeName: ButonKontrol, Assembly-CSharp
+        m_MethodName: Buton
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 4
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 4
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1389024786
@@ -1113,8 +1279,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.13, y: -117.23}
-  m_SizeDelta: {x: 1010.27, y: 857.37}
+  m_AnchoredPosition: {x: 0, y: -118.47}
+  m_SizeDelta: {x: 1016.2, y: 854.88}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2007308450
 MonoBehaviour:
@@ -1165,7 +1331,7 @@ GameObject:
   - component: {fileID: 2020494861}
   - component: {fileID: 2020494860}
   m_Layer: 0
-  m_Name: sahneGecis
+  m_Name: ileriSahne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1192,11 +1358,11 @@ Transform:
   m_GameObject: {fileID: 2020494859}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.5258188, y: 2.301848, z: 104.72448}
+  m_LocalPosition: {x: -8.179348, y: 1.970194, z: 98.0817}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1226084626}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2053137283
 GameObject:
@@ -1281,6 +1447,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1089940761}
+        m_TargetAssemblyTypeName: ParcaSayisi, Assembly-CSharp
+        m_MethodName: ParcaSayisiAl
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 8
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 2020494860}
         m_TargetAssemblyTypeName: SahneGecis, Assembly-CSharp
         m_MethodName: SahneGec
@@ -1293,16 +1471,16 @@ MonoBehaviour:
           m_StringArgument: Oyun
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1089940761}
-        m_TargetAssemblyTypeName: ParcaSayisi, Assembly-CSharp
-        m_MethodName: ParcaSayisiAl
-        m_Mode: 3
+      - m_Target: {fileID: 2125912970}
+        m_TargetAssemblyTypeName: ButonKontrol, Assembly-CSharp
+        m_MethodName: Buton
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 8
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: 8
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2053137286
@@ -1343,6 +1521,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2053137283}
   m_CullTransparentMesh: 1
+--- !u!1 &2125912968
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2125912969}
+  - component: {fileID: 2125912970}
+  m_Layer: 0
+  m_Name: butonKontrol
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2125912969
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125912968}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1016988737}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2125912970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125912968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d6562c8c70506546ae28e7535568296, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1350,6 +1572,6 @@ SceneRoots:
   - {fileID: 70373844}
   - {fileID: 109662335}
   - {fileID: 1181360107}
-  - {fileID: 1089940762}
-  - {fileID: 2020494861}
-  - {fileID: 839391313}
+  - {fileID: 1226084626}
+  - {fileID: 1016988737}
+  - {fileID: 648577885}
