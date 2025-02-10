@@ -15,30 +15,16 @@ public class Kart : MonoBehaviour, IPointerClickHandler
     private void Awake()
     {
         kartImage = GetComponent<Image>();
-        if (kartImage == null)
-        {
-            kartImage = gameObject.AddComponent<Image>();
-        }
     }
 
     private void Start()
     {
-        if (kartKontrol == null)
-        {
-            kartKontrol = FindFirstObjectByType<KartKontrol>();
-            if (kartKontrol == null)
-            {
-                Debug.LogWarning("Sahnede KartKontrol script'i bulunamadı!");
-            }
-        }
+        kartKontrol = FindFirstObjectByType<KartKontrol>() ?? throw new System.Exception("Sahnede KartKontrol script'i bulunamadı!");
     }
 
     public void KartiKur(KartOlusturucu olusturucu, int id)
     {
-        if (kartImage == null)
-        {
-            kartImage = GetComponent<Image>();
-        }
+        Image kartImage = GetComponent<Image>() ?? throw new System.Exception("Image component bulunamadı!");
         
         kartOlusturucu = olusturucu;
         kartID = id;
@@ -66,12 +52,7 @@ public class Kart : MonoBehaviour, IPointerClickHandler
     {
         if (kartImage == null)
         {
-            kartImage = GetComponent<Image>();
-            if (kartImage == null)
-            {
-                Debug.LogError("Image component bulunamadı!");
-                return;
-            }
+            kartImage = GetComponent<Image>() ?? throw new System.Exception("Image component bulunamadı!");
         }
 
         onYuzeDogruMu = yeniDurum;

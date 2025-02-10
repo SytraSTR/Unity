@@ -22,16 +22,10 @@ public class KartKontrol : MonoBehaviour
         if (eslestimi)
         {
             Debug.Log($"Eşleşme başarılı! Puan: {puan}");
-            if (skor != null)
-            {
-                skor.SkorEkle(puan);
-                if (skorKontrol != null)
-                {
-                    skorKontrol.EslesmedenPuanKazanildi(puan);
-                    skorKontrol.SkorEklendi(puan);
-                    skorKontrol.SkorGuncellendi(puan);
-                }
-            }
+            skor?.SkorEkle(puan);
+            skorKontrol?.EslesmedenPuanKazanildi(puan);
+            skorKontrol?.SkorEklendi(puan);
+            skorKontrol?.SkorGuncellendi(puan);
         }
         else
         {
@@ -47,16 +41,6 @@ public class KartKontrol : MonoBehaviour
     public void KalanKartBilgisi(int aktifKartSayisi)
     {
         Debug.Log($"Kalan aktif kart sayısı: {aktifKartSayisi}");
-    }
-
-    public void ImageBulunamadi()
-    {
-        Debug.LogError("Image component bulunamadı!");
-    }
-
-    public void ImageOtomatikEklendi()
-    {
-        Debug.LogWarning($"GameObject üzerinde Image bileşeni bulunamadı. Otomatik olarak eklendi.");
     }
 
     public void KartKontrolBulunamadi()

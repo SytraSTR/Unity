@@ -21,10 +21,10 @@ public class KartOlusturucu : MonoBehaviour
     private int puan = 0;
     private int _parcaSayisi;
     private bool oyunBitti = false;
-    private int aktifKartSayisi;  // Sınıf değişkeni olarak tanımlıyoruz
+    private int aktifKartSayisi;
     private KartKontrol kartKontrol;
     private OyunKontrol oyunKontrol;
-    private SaniyeKontrol saniyeKontrol;  // Yeni referans ekle
+    private SaniyeKontrol saniyeKontrol;
     private Saniye saniye;
 
     void OnEnable()
@@ -39,8 +39,7 @@ public class KartOlusturucu : MonoBehaviour
 
     void Start()
     {
-        // ... diğer start kodları ...
-        aktifKartSayisi = _parcaSayisi * _parcaSayisi;  // Başlangıçta toplam kart sayısını ayarlıyoruz
+        aktifKartSayisi = _parcaSayisi * _parcaSayisi;
     }
 
     public void YeniOyunBaslat()
@@ -53,7 +52,7 @@ public class KartOlusturucu : MonoBehaviour
 
         StopAllCoroutines();
         oyunBitti = false;
-        oyunKontrol.YeniOyunBasladi();  // Zaten var olan metodu kullanıyoruz
+        oyunKontrol.YeniOyunBasladi();
         StartCoroutine(GecikmeliBaslat());
     }
 
@@ -89,14 +88,11 @@ public class KartOlusturucu : MonoBehaviour
         }
 
         IzgaraOlustur();
-
-        // Başlangıç gösterimini başlat
         StartCoroutine(BaslangicGosterimi(tumKartlar));
     }
 
     void OnDisable()
     {
-        // Coroutine'leri ve değişkenleri temizle
         StopAllCoroutines();
         ilkSecilen = null;
         ikinciSecilen = null;
@@ -111,7 +107,7 @@ public class KartOlusturucu : MonoBehaviour
     {
         int totalKartlar = _parcaSayisi * _parcaSayisi;
         tumKartlar = new Kart[totalKartlar];
-        aktifKartSayisi = totalKartlar;  // Burada ayarlıyoruz
+        aktifKartSayisi = totalKartlar;
         kartKontrol.KalanKartBilgisi(aktifKartSayisi);
         oyunKontrol.ToplamParcaSayisi(totalKartlar);
 
@@ -123,7 +119,6 @@ public class KartOlusturucu : MonoBehaviour
             kartIDleri.Add(spriteIndex);
         }
 
-        // ID'leri karıştır
         for (int i = 0; i < kartIDleri.Count; i++)
         {
             int temp = kartIDleri[i];
@@ -132,7 +127,6 @@ public class KartOlusturucu : MonoBehaviour
             kartIDleri[randomIndex] = temp;
         }
 
-        // Kartları oluştur
         for (int i = 0; i < totalKartlar; i++)
         {
             GameObject yeniKart = Instantiate(hazirKart, izgaraNesne);
@@ -141,22 +135,18 @@ public class KartOlusturucu : MonoBehaviour
             kartScript.KartiKur(this, kartIDleri[i]);
         }
 
-        // Başlangıç animasyonunu başlat
         StartCoroutine(BaslangicAnimasyonu());
     }
 
     private IEnumerator BaslangicAnimasyonu()
     {
-        // Tüm kartları ön yüze çevir
         foreach (var kart in tumKartlar)
         {
             kart.KartiCevir(true);
         }
 
-        // 1 saniye bekle
         yield return new WaitForSeconds(1f);
 
-        // Tüm kartları arka yüze çevir
         foreach (var kart in tumKartlar)
         {
             kart.KartiCevir(false);
@@ -167,13 +157,6 @@ public class KartOlusturucu : MonoBehaviour
 
     public void OnYuz()
     {
-        if (onYuz == null || onYuz.Length == 0)
-        {
-            kartKontrol.ImageBulunamadi();
-            return;
-        }
-
-        // Kart ID'lerini oluştur ve karıştır
         List<int> kartIDleri = new List<int>();
         int ciftSayisi = (_parcaSayisi * _parcaSayisi) / 2;
         
@@ -181,26 +164,18 @@ public class KartOlusturucu : MonoBehaviour
         {
             if (i >= onYuz.Length)
             {
-                kartKontrol.ImageOtomatikEklendi();
                 i = 0;
             }
             kartIDleri.Add(i);
             kartIDleri.Add(i);
         }
 
-        // Fisher-Yates karıştırma algoritması
         for (int i = kartIDleri.Count - 1; i > 0; i--)
         {
             int randomIndex = Random.Range(0, i + 1);
             int temp = kartIDleri[i];
             kartIDleri[i] = kartIDleri[randomIndex];
             kartIDleri[randomIndex] = temp;
-        }
-
-        if (tumKartlar.Length != kartIDleri.Count)
-        {
-            kartKontrol.ImageBulunamadi();
-            return;
         }
 
         for (int i = 0; i < tumKartlar.Length; i++)
@@ -219,11 +194,9 @@ public class KartOlusturucu : MonoBehaviour
     {
         if (kartlar == null || kartlar.Length == 0)
         {
-            kartKontrol.ImageBulunamadi();
             yield break;
         }
 
-        // Kartların ön yüzünü göster
         foreach (var kart in kartlar)
         {
             if (kart != null)
@@ -232,10 +205,8 @@ public class KartOlusturucu : MonoBehaviour
             }
         }
 
-        // 1 saniye bekle
         yield return new WaitForSeconds(1f);
 
-        // Kartların arka yüzünü göster
         foreach (var kart in kartlar)
         {
             if (kart != null)
@@ -247,7 +218,6 @@ public class KartOlusturucu : MonoBehaviour
 
     public void KartSecildi(Kart secilenKart)
     {
-        // Eğer oyun bittiyse, kontrol devam ediyorsa veya kartlar kilitliyse işlem yapma
         if (oyunBitti || kontrolEdiliyor || kartlarKilitli) return;
 
         if (ilkSecilen == null)
@@ -292,6 +262,7 @@ public class KartOlusturucu : MonoBehaviour
                 if (oyunKontrol != null)
                 {
                     oyunKontrol.OyunBitti();
+                    // Removed the scene loading code for "OyunKazanma"
                     if (saniye != null)
                     {
                         saniye.OyunuBitir();

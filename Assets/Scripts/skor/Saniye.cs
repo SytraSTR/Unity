@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement; // Added for scene management
 
 public class Saniye : MonoBehaviour
 {
@@ -7,24 +8,29 @@ public class Saniye : MonoBehaviour
     private TextMeshProUGUI zamanText;
     private float gecenSure = 0f;
     private bool oyunTamamlandi = false;
-    private SaniyeKontrol saniyeKontrol;
+    private SaniyeKontrol saniyeKontrol; // Inspector'da atanacak
+
 
     void Awake()
     {
-        Instance = this;
-        saniyeKontrol = FindFirstObjectByType<SaniyeKontrol>();
+        
+        if (saniyeKontrol == null)
+        {
+            
+            if (saniyeKontrol == null)
+            {
+                Debug.LogError("SaniyeKontrol instance bulunamadı! Lütfen sahnede SaniyeKontrol GameObject'inin mevcut olduğundan emin olun.");
+            }
+        }
     }
 
     void OnEnable()
     {
-        // Oyun başladığında sıfırla
+        
         oyunTamamlandi = false;
         gecenSure = 0f;
-        if (zamanText != null)
-        {
-            zamanText.text = "0";
-        }
-        saniyeKontrol.SaniyeSayacıBaslatildi();
+        zamanText.text = "0"; 
+        saniyeKontrol.SaniyeSayaciBaslatildi();
     }
 
     void Start()
@@ -41,11 +47,7 @@ public class Saniye : MonoBehaviour
         if (!oyunTamamlandi)
         {
             gecenSure += Time.deltaTime;
-            if (zamanText != null)
-            {
-                zamanText.text = $"Saniye: {Mathf.Floor(gecenSure)}";
-            }
-
+            zamanText.text = $"Saniye: {Mathf.Floor(gecenSure)}"; // Removed null check for simplicity
         }
     }
 
@@ -53,7 +55,16 @@ public class Saniye : MonoBehaviour
     {
         saniyeKontrol.OyunBitisMetoduCagrildi();
         oyunTamamlandi = true;
+        zamanText.text = $"Oyun Bitti! Süre: {Mathf.Floor(gecenSure)}"; // Show final time on game over
         saniyeKontrol.OyunTamamlanmaSuresi(gecenSure);
+        
+        // Check if the current scene is OyunKazanma
+        if (SceneManager.GetActiveScene().name == "OyunKazanma")
+        {
+            zamanText.text = $"Tamamlanan Süre: {Mathf.Floor(gecenSure)}"; // Display elapsed time if in OyunKazanma scene
+        }
+
+        PlayerPrefs.SetFloat("KazanilanSure", gecenSure); // Store the elapsed time
     }
 
     public void OyunuDurdur()
@@ -68,3 +79,5 @@ public class Saniye : MonoBehaviour
         }
     }
 }
+
+

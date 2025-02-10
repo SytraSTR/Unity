@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 79.053375, y: 12.10585}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 80.6, y: 4.1257}
+  m_SizeDelta: {x: 90, y: 130}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4908098676073101675
 CanvasRenderer:
@@ -90,3 +90,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   kartID: 0
   kartOlusturucu: {fileID: 0}
+  kartKontrol: {fileID: 0}

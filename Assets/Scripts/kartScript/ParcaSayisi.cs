@@ -1,4 +1,5 @@
-using UnityEngine;
+using UnityEngine; // UnityEngine kütüphanesini kullan
+
 
 public class ParcaSayisi : MonoBehaviour
 {

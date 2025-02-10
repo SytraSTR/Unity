@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SaniyeKontrol : MonoBehaviour
 {
-    public void SaniyeSayacıBaslatildi()
+    public void SaniyeSayaciBaslatildi()
     {
         Debug.Log("Saniye sayacı başlatıldı.");
     }
@@ -26,4 +26,5 @@ public class SaniyeKontrol : MonoBehaviour
     {
         Debug.LogError("Saniye instance'ı bulunamadı!");
     }
+
 }

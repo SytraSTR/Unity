@@ -14,7 +14,7 @@ public class Skor : MonoBehaviour
 
     public void SkorEkle(int puan)
     {
-        skor = puan;
+        skor = puan; // Değişiklik: puanı ekle
         SkoruGuncelle();
     }
 
