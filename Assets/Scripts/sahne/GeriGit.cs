@@ -1,23 +1,17 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
+using System.Collections;
 
 public class GeriGit : MonoBehaviour
 {
     private float sonBasmaZamani;
-    private float ciftBasmaAraligi = 0.5f; // İki basma arasında izin verilen maksimum süre
-    private TextMeshProUGUI uyariText;
-    private float uyariSuresi = 1f;
-    private float uyariZamani;
-    private bool uyariGosteriliyor;
+    private float ciftBasmaAraligi = 1f; // İki basma arasında izin verilen maksimum süre
+    [SerializeField] private GameObject gizliNesne; // Yeni nesne, SerializeField ile eklendi
 
     void Start()
     {
-        uyariText = GameObject.Find("UyariText")?.GetComponent<TextMeshProUGUI>();
-        if (uyariText != null)
-        {
-            uyariText.text = "";
-        }
+        // Gizli nesneyi başlangıçta görünmez yap
+        gizliNesne?.SetActive(false);
     }
 
     void Update()
@@ -25,35 +19,47 @@ public class GeriGit : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             float simdikiZaman = Time.time;
-            if (simdikiZaman - sonBasmaZamani <= ciftBasmaAraligi)
+            switch (SceneManager.GetActiveScene().name)
             {
-                GeriButonu();
-            }
-            else
-            {
-                UyariGoster("Çıkmak için ESC tuşuna tekrar basın");
-            }
-            sonBasmaZamani = simdikiZaman;
-        }
-
-        // Uyarı metnini belirli süre sonra kaldır
-        if (uyariGosteriliyor && Time.time - uyariZamani >= uyariSuresi)
-        {
-            if (uyariText != null)
-            {
-                uyariText.text = "";
-                uyariGosteriliyor = false;
+                case "OyunArayuzu":
+                    // OyunArayuzu sahnesindeysen direkt çık
+                    GeriButonu();
+                    break;
+                case "AnaMenu":
+                    // Ana Menüdeki çift basma kontrolü
+                    if (simdikiZaman - sonBasmaZamani <= ciftBasmaAraligi)
+                    {
+                        // Ana menüde çıkış yap
+                        Application.Quit();
+                    }
+                    else
+                    {
+                        UyariGoster();
+                        sonBasmaZamani = simdikiZaman; // Zamanı güncelle
+                    }
+                    break;
+                default:
+                    if (simdikiZaman - sonBasmaZamani <= ciftBasmaAraligi)
+                    {
+                        GeriButonu();
+                    }
+                    else
+                    {   
+                        UyariGoster();
+                    }
+                    sonBasmaZamani = simdikiZaman;
+                    break;
             }
         }
     }
 
-    private void UyariGoster(string mesaj)
+    private void UyariGoster()
     {
-        if (uyariText != null)
+        // Uyarı nesnesini göster
+        if (gizliNesne != null)
         {
-            uyariText.text = mesaj;
-            uyariGosteriliyor = true;
-            uyariZamani = Time.time;
+            gizliNesne.SetActive(true);
+            StartCoroutine(GizliNesneGorunur());
         }
     }
 
@@ -67,4 +73,10 @@ public class GeriGit : MonoBehaviour
             SceneManager.LoadScene(geriSahneIndex);
         }
     }
-} 
+
+    private IEnumerator GizliNesneGorunur()
+    {
+        yield return new WaitForSeconds(1f);
+        gizliNesne?.SetActive(false);
+    }
+}

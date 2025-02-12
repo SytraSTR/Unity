@@ -14,6 +14,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Oyun.unity
     guid: 89e4693334d401e40a39c9d3563f23bc
+  - enabled: 1
+    path: Assets/Scenes/OyunKazanma.unity
+    guid: c1097ea83e94876489b66c0f6dfda367
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

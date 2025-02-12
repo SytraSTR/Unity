@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.SceneManagement; // Added for scene management
 
 public class KartOlusturucu : MonoBehaviour
 {
@@ -22,18 +23,13 @@ public class KartOlusturucu : MonoBehaviour
     private int _parcaSayisi;
     private bool oyunBitti = false;
     private int aktifKartSayisi;
-    private KartKontrol kartKontrol;
-    private OyunKontrol oyunKontrol;
-    private SaniyeKontrol saniyeKontrol;
-    private Saniye saniye;
+    private Saniye saniye; 
+    private Skor skor;
 
     void OnEnable()
     {
-        kartKontrol = FindFirstObjectByType<KartKontrol>();
-        oyunKontrol = FindFirstObjectByType<OyunKontrol>();
-        saniyeKontrol = FindFirstObjectByType<SaniyeKontrol>();
         saniye = FindFirstObjectByType<Saniye>();
-
+        skor = FindFirstObjectByType<Skor>();
         YeniOyunBaslat();
     }
 
@@ -44,15 +40,8 @@ public class KartOlusturucu : MonoBehaviour
 
     public void YeniOyunBaslat()
     {
-        if (oyunKontrol == null || kartKontrol == null)
-        {
-            kartKontrol?.KartKontrolBulunamadi();
-            return;
-        }
-
         StopAllCoroutines();
         oyunBitti = false;
-        oyunKontrol.YeniOyunBasladi();
         StartCoroutine(GecikmeliBaslat());
     }
 
@@ -61,8 +50,6 @@ public class KartOlusturucu : MonoBehaviour
         yield return new WaitForEndOfFrame();
         
         _parcaSayisi = PlayerPrefs.GetInt("SelectedGridSize", 4);
-        
-        oyunKontrol.IzgaraBoyutuAyarlandi(_parcaSayisi);
 
         foreach (Transform child in izgaraNesne)
         {
@@ -100,7 +87,6 @@ public class KartOlusturucu : MonoBehaviour
         kartlarKilitli = false;
         puan = 0;
         oyunBitti = false;
-        oyunKontrol.OyunDurduruldu();
     }
 
     private void IzgaraOlustur()
@@ -108,13 +94,11 @@ public class KartOlusturucu : MonoBehaviour
         int totalKartlar = _parcaSayisi * _parcaSayisi;
         tumKartlar = new Kart[totalKartlar];
         aktifKartSayisi = totalKartlar;
-        kartKontrol.KalanKartBilgisi(aktifKartSayisi);
-        oyunKontrol.ToplamParcaSayisi(totalKartlar);
 
         List<int> kartIDleri = new List<int>();
         for (int i = 0; i < totalKartlar / 2; i++)
         {
-            int spriteIndex = i % onYuz.Length;
+            int spriteIndex = Random.Range(0, onYuz.Length); // Randomly select sprite index
             kartIDleri.Add(spriteIndex);
             kartIDleri.Add(spriteIndex);
         }
@@ -151,8 +135,6 @@ public class KartOlusturucu : MonoBehaviour
         {
             kart.KartiCevir(false);
         }
-        
-        oyunKontrol.OyunDevamEdiyor();
     }
 
     public void OnYuz()
@@ -162,12 +144,9 @@ public class KartOlusturucu : MonoBehaviour
         
         for (int i = 0; i < ciftSayisi; i++)
         {
-            if (i >= onYuz.Length)
-            {
-                i = 0;
-            }
-            kartIDleri.Add(i);
-            kartIDleri.Add(i);
+            int spriteIndex = Random.Range(0, onYuz.Length); // Randomly select sprite index
+            kartIDleri.Add(spriteIndex);
+            kartIDleri.Add(spriteIndex);
         }
 
         for (int i = kartIDleri.Count - 1; i > 0; i--)
@@ -249,34 +228,23 @@ public class KartOlusturucu : MonoBehaviour
         if (eslesme)
         {
             puan += 10;
-            kartKontrol.KartEslesmesi(ilkSecilen.kartID, ikinciSecilen.kartID, true, puan);
+            skor.SkorEkle(puan); // Send score to Skor script
             
             ilkSecilen.KartiGizle();
             ikinciSecilen.KartiGizle();
             
             aktifKartSayisi -= 2;
-            kartKontrol.KalanKartBilgisi(aktifKartSayisi);
 
-            if (aktifKartSayisi <= 0)
+            // Check if all cards are matched
+            if (aktifKartSayisi == 0)
             {
-                if (oyunKontrol != null)
-                {
-                    oyunKontrol.OyunBitti();
-                    // Removed the scene loading code for "OyunKazanma"
-                    if (saniye != null)
-                    {
-                        saniye.OyunuBitir();
-                    }
-                    else
-                    {
-                        saniyeKontrol.SaniyeInstanceBulunamadi();
-                    }
-                }
+                oyunBitti = true;
+                saniye.OyunuBitir();
+                SceneManager.LoadScene("OyunKazanma"); // Load the OyunKazanma scene
             }
         }
         else
         {
-            kartKontrol.KartEslesmesi(ilkSecilen.kartID, ikinciSecilen.kartID, false, puan);
             ilkSecilen.KartiCevir(false);
             ikinciSecilen.KartiCevir(false);
         }

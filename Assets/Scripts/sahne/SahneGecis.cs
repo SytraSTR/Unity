@@ -5,6 +5,13 @@ public class SahneGecis : MonoBehaviour
 {
     public void SahneGec(string SahneAdi)
     {
-        SceneManager.LoadScene(SahneAdi);
+        if (SahneAdi == "Cikis")
+        {
+            Application.Quit();
+        }
+        else
+        {
+            SceneManager.LoadScene(SahneAdi);
+        }
     }
 }

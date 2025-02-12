@@ -6,7 +6,6 @@ public class Kart : MonoBehaviour, IPointerClickHandler
 {
     public int kartID;
     public KartOlusturucu kartOlusturucu;
-    public KartKontrol kartKontrol;
     private Image kartImage;
     private bool onYuzeDogruMu = false;
 
@@ -15,11 +14,6 @@ public class Kart : MonoBehaviour, IPointerClickHandler
     private void Awake()
     {
         kartImage = GetComponent<Image>();
-    }
-
-    private void Start()
-    {
-        kartKontrol = FindFirstObjectByType<KartKontrol>() ?? throw new System.Exception("Sahnede KartKontrol script'i bulunamadı!");
     }
 
     public void KartiKur(KartOlusturucu olusturucu, int id)
@@ -36,7 +30,6 @@ public class Kart : MonoBehaviour, IPointerClickHandler
         if (kartOlusturucu == null || onYuzeDogruMu || kartOlusturucu.kartlarKilitli) return;
         KartiCevir(true);
         kartOlusturucu.KartSecildi(this);
-        kartKontrol.KartaDokunuldu(kartID);
     }
 
     public void KartiGizle()
