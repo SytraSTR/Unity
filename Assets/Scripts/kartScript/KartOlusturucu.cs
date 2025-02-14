@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.SceneManagement; // Added for scene management
+using DG.Tweening;
+using System.IO; // Make sure to include the DoTween namespace
 
 public class KartOlusturucu : MonoBehaviour
 {
@@ -230,14 +232,48 @@ public class KartOlusturucu : MonoBehaviour
             puan += 10;
             skor.SkorEkle(puan); // Send score to Skor script
             
-            ilkSecilen.KartiGizle();
-            ikinciSecilen.KartiGizle();
+            // Add fade out animation using DoTween
+            var kart1 = ilkSecilen.GetComponent<Image>();
+            var kart2 = ikinciSecilen.GetComponent<Image>();
+
+            // Check if kart1 and kart2 are not null before accessing them
+            if (kart1 != null && kart2 != null)
+            {
+                kart1.DOFade(0, 1f).OnComplete(() => 
+                {
+                    if (ilkSecilen != null) // Check if ilkSecilen is still valid
+                    {
+                        ilkSecilen.KartiGizle();
+                    }
+                    else
+                    {
+                        Debug.Log("ilkSecilen null oldu.");
+                    }
+                });
+                kart2.DOFade(0, 1f).OnComplete(() => 
+                {
+                    if (ikinciSecilen != null) // Check if ikinciSecilen is still valid
+                    {
+                        ikinciSecilen.KartiGizle();
+                    }
+                    else
+                    {
+                        Debug.Log("ikinciSecilen null oldu.");
+                    }
+                });
+            }
+            else
+            {
+                Debug.Log("Kartlar null: kart1 veya kart2.");
+            }
             
             aktifKartSayisi -= 2;
 
             // Check if all cards are matched
             if (aktifKartSayisi == 0)
             {
+                DOTween.KillAll();
+
                 oyunBitti = true;
                 saniye.OyunuBitir();
                 SceneManager.LoadScene("OyunKazanma"); // Load the OyunKazanma scene
@@ -245,10 +281,11 @@ public class KartOlusturucu : MonoBehaviour
         }
         else
         {
-            ilkSecilen.KartiCevir(false);
-            ikinciSecilen.KartiCevir(false);
+            if (ilkSecilen != null) ilkSecilen.KartiCevir(false);
+            if (ikinciSecilen != null) ikinciSecilen.KartiCevir(false);
         }
 
+        // Reset selections
         ilkSecilen = null;
         ikinciSecilen = null;
         kontrolEdiliyor = false;

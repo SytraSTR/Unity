@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using DG.Tweening; // Make sure to include the DoTween namespace
 
 public class Kart : MonoBehaviour, IPointerClickHandler
 {
@@ -18,8 +19,6 @@ public class Kart : MonoBehaviour, IPointerClickHandler
 
     public void KartiKur(KartOlusturucu olusturucu, int id)
     {
-        Image kartImage = GetComponent<Image>() ?? throw new System.Exception("Image component bulunamadı!");
-        
         kartOlusturucu = olusturucu;
         kartID = id;
         KartiCevir(false);
@@ -37,19 +36,27 @@ public class Kart : MonoBehaviour, IPointerClickHandler
         if (kartImage != null)
         {
             kartImage.enabled = false;
+            gameObject.SetActive(false);
         }
         onYuzeDogruMu = false;
     }
 
     public void KartiCevir(bool yeniDurum)
     {
-        if (kartImage == null)
+        if (kartImage != null)
         {
-            kartImage = GetComponent<Image>() ?? throw new System.Exception("Image component bulunamadı!");
-        }
+            onYuzeDogruMu = yeniDurum;
+            kartImage.enabled = true;
 
-        onYuzeDogruMu = yeniDurum;
-        kartImage.enabled = true;
-        kartImage.sprite = yeniDurum ? kartOlusturucu.OnYuzSprites[kartID] : kartOlusturucu.ArkaPlanSprite;
+            float targetRotation = yeniDurum ? 180f : 0f; // Rotate to 90 degrees for face-up, 0 for face-down
+            kartImage.DOFade(0, 1f).OnComplete(() => // Fade out the image
+            {
+                transform.DORotate(new Vector3(0, targetRotation, 0), 0.5f).OnComplete(() =>
+                {
+                    kartImage.sprite = yeniDurum ? kartOlusturucu.OnYuzSprites[kartID] : kartOlusturucu.ArkaPlanSprite;
+                    kartImage.DOFade(1, 0.25f); // Fade in the image
+                });
+            });
+        }
     }
 }
