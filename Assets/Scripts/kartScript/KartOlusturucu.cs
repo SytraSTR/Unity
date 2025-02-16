@@ -128,14 +128,14 @@ public class KartOlusturucu : MonoBehaviour
     {
         foreach (var kart in tumKartlar)
         {
-            kart.KartiCevir(true);
+            kart.KartiCevir(true, true);
         }
 
         yield return new WaitForSeconds(1f);
 
         foreach (var kart in tumKartlar)
         {
-            kart.KartiCevir(false);
+            kart.KartiCevir(false, true);
         }
     }
 
@@ -182,7 +182,7 @@ public class KartOlusturucu : MonoBehaviour
         {
             if (kart != null)
             {
-                kart.KartiCevir(true);
+                kart.KartiCevir(true, true);
             }
         }
 
@@ -192,7 +192,7 @@ public class KartOlusturucu : MonoBehaviour
         {
             if (kart != null)
             {
-                kart.KartiCevir(false);
+                kart.KartiCevir(false, true);
             }
         }
     }
@@ -281,8 +281,8 @@ public class KartOlusturucu : MonoBehaviour
         }
         else
         {
-            if (ilkSecilen != null) ilkSecilen.KartiCevir(false);
-            if (ikinciSecilen != null) ikinciSecilen.KartiCevir(false);
+            if (ilkSecilen != null) ilkSecilen.KartiCevir(false, true);
+            if (ikinciSecilen != null) ikinciSecilen.KartiCevir(false, true);
         }
 
         // Reset selections
@@ -292,3 +292,4 @@ public class KartOlusturucu : MonoBehaviour
         kartlarKilitli = false;
     }
 }
+
