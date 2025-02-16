@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.SceneManagement; // Added for scene management
 using DG.Tweening;
-using System.IO; // Make sure to include the DoTween namespace
 
 public class KartOlusturucu : MonoBehaviour
 {

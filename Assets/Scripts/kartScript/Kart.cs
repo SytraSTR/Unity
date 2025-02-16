@@ -30,7 +30,7 @@ public class Kart : MonoBehaviour, IPointerClickHandler
         if (kartOlusturucu == null || onYuzeDogruMu || kartOlusturucu.kartlarKilitli || animasyonDevamEdiyor) 
             return;
 
-        KartiCevir(true, false);
+        KartiCevir(true, true);
         kartOlusturucu.KartSecildi(this);
     }
 
@@ -44,21 +44,34 @@ public class Kart : MonoBehaviour, IPointerClickHandler
     {
         if (kartImage == null || animasyonDevamEdiyor) return;
         onYuzeDogruMu = yeniDurum;
-
+    
         if (anindaCevir) 
         {
-            kartImage.sprite = yeniDurum ? kartOlusturucu.OnYuzSprites[kartID] : kartOlusturucu.ArkaPlanSprite;
+            // Önce kartı 90 derece döndür ve ardından sprite'ı hemen değiştir.
+            transform.DORotate(new Vector3(0, 90, 0), 0.25f).OnComplete(() =>
+            {
+                kartImage.sprite = yeniDurum ? kartOlusturucu.OnYuzSprites[kartID] : kartOlusturucu.ArkaPlanSprite;
+                
+                // Sonra kartı tekrar 0 dereceye döndür.
+                transform.DORotate(new Vector3(0, 0, 0), 0.25f);
+            });
             return;
         }
-
+    
         animasyonDevamEdiyor = true;
-        transform.DORotate(new Vector3(0, 90, 0), 0.25f).OnComplete(() =>
+    
+        // Arka yüz animasyonu: Kartı önce arka yüze döndür.
+        transform.DORotate(new Vector3(0, 180, 0), 0.25f).OnComplete(() =>
         {
             kartImage.sprite = yeniDurum ? kartOlusturucu.OnYuzSprites[kartID] : kartOlusturucu.ArkaPlanSprite;
+    
+            // Sonra kartı tekrar ön yüze döndür.
             transform.DORotate(new Vector3(0, 0, 0), 0.25f).OnComplete(() =>
             {
                 animasyonDevamEdiyor = false;
             });
         });
     }
+    
+
 }
